@@ -9,6 +9,7 @@ module.exports = {
       autorestart: true,
       watch: false,
       post_update: ['npm run build'],
+      post_reload: ['npm run build'],
     },
   ],
 };
