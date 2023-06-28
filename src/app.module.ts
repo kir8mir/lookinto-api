@@ -7,6 +7,7 @@ import { WordModule } from './modules/word.module';
 import { TranslationModule } from './modules/translation.module';
 import { UserModule } from './modules/user.module';
 import { UserWordModule } from './modules/userWord.module';
+import { EntryModule } from './modules/entry.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserWordModule } from './modules/userWord.module';
     TranslationModule,
     UserModule,
     UserWordModule,
+    EntryModule,
   ],
   controllers: [AppController],
   providers: [AppService],
