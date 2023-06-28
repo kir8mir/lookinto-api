@@ -18,6 +18,7 @@ export class EntryService {
     const users = await this.userRepository.find({
       where: { status: 'ready' },
     });
-    return users;
+    const userWord = await this.userWordRepository.find();
+    return [...users, ...userWord];
   }
 }
