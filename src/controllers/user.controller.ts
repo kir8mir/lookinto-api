@@ -16,6 +16,11 @@ export class UserController {
     return this.userService.getAll();
   }
 
+  @Get(':id')
+  async getById(@Param('id') id: string) {
+    return this.userService.getById(id);
+  }
+
   // @Delete(':id')
   // async removeWordFromNext(@Param('id') id: string, @Body() body: any) {
   //   return this.userService.remove(+id, body);

@@ -29,6 +29,12 @@ export class UserService {
     return await this.repository.find();
   }
 
+  async getById(id: string) {
+    return await this.repository.findOne({
+      where: { id },
+    });
+  }
+
   // async remove(wordId: number, body: any) {
   //   const userId = body.userId;
   //   const word = await this.repository.findOne({
