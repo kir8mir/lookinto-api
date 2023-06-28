@@ -8,6 +8,7 @@ import { TranslationModule } from './modules/translation.module';
 import { UserModule } from './modules/user.module';
 import { UserWordModule } from './modules/userWord.module';
 import { EntryModule } from './modules/entry.module';
+import { gitHookController } from './controllers/gitHook.controller';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { EntryModule } from './modules/entry.module';
     UserWordModule,
     EntryModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, gitHookController],
   providers: [AppService],
 })
 export class AppModule {}
