@@ -12,7 +12,7 @@ export class EntryService {
   ) {}
 
   async globalUpdate() {
-    const user = await this.userRepository.find()[0];
+    const user = await this.userRepository.find();
     return user;
   }
 }
