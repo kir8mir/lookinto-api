@@ -3,7 +3,6 @@ import { exec } from 'child_process';
 
 @Controller('gitHook')
 export class gitHookController {
-  
   @Post()
   handleWebhook() {
     // Выполнить команду git pull
@@ -15,17 +14,20 @@ export class gitHookController {
       } else {
         console.log(`Результат выполнения команды git pull: ${stdout}`);
         // Перезагрузить сервер (замените команду на соответствующую для вашей системы)
-        exec('sudo pm2 restart lookinto-api', (error) => {
-          if (error) {
-            console.error(`Ошибка при перезагрузке сервера: ${error}`);
-            // Обработка ошибки при перезагрузке сервера
-            return HttpStatus.INTERNAL_SERVER_ERROR;
-          } else {
-            console.log('Сервер успешно перезагружен');
-            // Отправить успешный HTTP-статус
-            return HttpStatus.OK;
-          }
-        });
+        exec(
+          'sudo /root/.nvm/versions/node/v16.18.1/bin/pm2 restart lookinto-api',
+          (error) => {
+            if (error) {
+              console.error(`Ошибка при перезагрузке сервера: ${error}`);
+              // Обработка ошибки при перезагрузке сервера
+              return HttpStatus.INTERNAL_SERVER_ERROR;
+            } else {
+              console.log('Сервер успешно перезагружен');
+              // Отправить успешный HTTP-статус
+              return HttpStatus.OK;
+            }
+          },
+        );
       }
     });
   }
