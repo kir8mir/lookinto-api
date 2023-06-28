@@ -18,4 +18,10 @@ export class UserWordEntity extends BaseEntity {
   @Column()
   @Index()
   userId: string;
+
+  @Column()
+  status: string;
+
+  @Column()
+  statusCounter: number;
 }

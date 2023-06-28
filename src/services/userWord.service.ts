@@ -15,6 +15,8 @@ export class UserWordService {
     const model = new UserWordEntity();
     model.wordId = data.wordId;
     model.userId = data.userId;
+    model.status = 'new';
+    model.statusCounter = 4;
     return await model.save();
   }
 

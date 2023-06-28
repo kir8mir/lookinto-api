@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ormconfig } from './db/source';
 import { WordModule } from './modules/word.module';
 import { TranslationModule } from './modules/translation.module';
-import { NextModule } from './modules/next.module';
+import { UserModule } from './modules/user.module';
 import { UserWordModule } from './modules/userWord.module';
 
 @Module({
@@ -13,7 +13,7 @@ import { UserWordModule } from './modules/userWord.module';
     TypeOrmModule.forRoot(ormconfig),
     WordModule,
     TranslationModule,
-    NextModule,
+    UserModule,
     UserWordModule,
   ],
   controllers: [AppController],
