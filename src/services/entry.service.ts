@@ -2,13 +2,12 @@ import { Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { WordEntity } from '../entities/word.entity';
 import { UserEntity } from '../entities/user.entity';
 
 @Injectable()
 export class EntryService {
   constructor(
-    @InjectRepository(WordEntity)
+    @InjectRepository(UserEntity)
     protected readonly userRepository: Repository<UserEntity>,
   ) {}
 
