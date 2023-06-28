@@ -26,7 +26,7 @@ export class UserEntity extends BaseEntity {
   @Column()
   billStatus: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Index()
   payday: string;
 }
