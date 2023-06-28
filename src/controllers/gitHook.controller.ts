@@ -14,6 +14,24 @@ export class gitHookController {
       } else {
         console.log(`Результат выполнения команды git pull: ${stdout}`);
         // Перезагрузить сервер (замените команду на соответствующую для вашей системы)
+
+        exec(
+          'sudo npm run build',
+          (error) => {
+            if (error) {
+              console.error(`Ошибка при сборке сервера: ${error}`);
+              // Обработка ошибки при перезагрузке сервера
+              return HttpStatus.INTERNAL_SERVER_ERROR;
+            } else {
+              console.log('Сервер успешно собран');
+              // Отправить успешный HTTP-статус
+              return HttpStatus.OK;
+            }
+          },
+        );
+      }
+    });
+
         exec(
           'sudo /root/.nvm/versions/node/v16.18.1/bin/pm2 restart lookinto-api',
           (error) => {

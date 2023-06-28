@@ -13,8 +13,7 @@ export class EntryService {
     @InjectRepository(UserWordEntity)
     protected readonly userWordRepository: Repository<UserWordEntity>,
   ) {}
-
-
+  
   async globalUpdate() {
     const users = await this.userRepository.find({
       where: { status: 'ready' },
