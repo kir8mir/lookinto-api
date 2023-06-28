@@ -3,6 +3,7 @@ import { exec } from 'child_process';
 
 @Controller('gitHook')
 export class gitHookController {
+  
   @Post()
   handleWebhook() {
     // Выполнить команду git pull
