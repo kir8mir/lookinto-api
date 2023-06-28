@@ -20,7 +20,7 @@ export class UserEntity extends BaseEntity {
   @Column()
   messageTimeCounter: number;
 
-  @Column()
+  @Column({ nullable: true })
   doNotDisturb: string;
 
   @Column()

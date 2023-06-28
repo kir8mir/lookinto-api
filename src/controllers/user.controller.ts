@@ -7,7 +7,7 @@ export class UserController {
   constructor(protected userService: UserService) {}
 
   @Post()
-  async addWordToNext(@Body() body: any) {
+  async create(@Body() body: any) {
     return this.userService.create(body);
   }
 
