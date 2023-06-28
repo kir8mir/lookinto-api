@@ -14,7 +14,7 @@ export class gitHookController {
       } else {
         console.log(`Результат выполнения команды git pull: ${stdout}`);
         // Перезагрузить сервер (замените команду на соответствующую для вашей системы)
-        exec('sudo systemctl restart your_service_name', (error) => {
+        exec('sudo pm2 restart lookinto-api', (error) => {
           if (error) {
             console.error(`Ошибка при перезагрузке сервера: ${error}`);
             // Обработка ошибки при перезагрузке сервера
