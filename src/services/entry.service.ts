@@ -18,6 +18,7 @@ export class EntryService {
     const users = await this.userRepository.find({
       where: { status: 'ready' },
     });
+    console.log('Hook:', '123');
     return users;
   }
 }
