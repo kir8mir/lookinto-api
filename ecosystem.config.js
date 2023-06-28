@@ -8,8 +8,7 @@ module.exports = {
       instances: 1,
       autorestart: true,
       watch: false,
-      post_update: ['npm run build'],
-      post_reload: ['npm run build'],
+      pre_start: 'run build',
     },
   ],
 };
