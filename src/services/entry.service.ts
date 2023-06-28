@@ -9,7 +9,6 @@ import { UserEntity } from '../entities/user.entity';
 export class EntryService {
   constructor(
     @InjectRepository(WordEntity)
-    protected readonly repository: Repository<WordEntity>,
     protected readonly userRepository: Repository<UserEntity>,
   ) {}
 
