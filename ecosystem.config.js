@@ -8,7 +8,7 @@ module.exports = {
       instances: 1,
       autorestart: true,
       watch: false,
-      pre_start: 'run build',
+      pre_start: 'npm run build',
     },
   ],
 };
