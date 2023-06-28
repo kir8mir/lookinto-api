@@ -12,7 +12,7 @@ export const ormconfig: PostgresConnectionOptions = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   synchronize: false,
-  logging: true,
+  logging: false,
   entities: [resolve(__dirname, '../**/*.entity{.ts,.js}')],
   migrations: [resolve(__dirname, 'migrations/*.ts')],
   subscribers: [],
