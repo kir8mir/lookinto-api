@@ -36,6 +36,17 @@ export class UserWordService {
     });
   }
 
+  async getAllFamiliar(id: string) {
+    return await this.repository.find({
+      where: { userId: id, status: 'familiar' },
+    });
+  }
+
+  async getAllForgotten(id: string) {
+    return await this.repository.find({
+      where: { userId: id, status: 'forgotten' },
+    });
+  }
   async remove(wordId: number, body: any) {
     const userId = body.userId;
     const word = await this.repository.findOne({
