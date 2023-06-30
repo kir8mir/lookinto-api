@@ -46,8 +46,8 @@ export class UserWordService {
         translations: await result.translations,
       };
     });
-    console.log('result', result);
-    return result;
+    console.log('result', await result);
+    return await result;
   }
 
   async getAllFamiliar(id: string) {
