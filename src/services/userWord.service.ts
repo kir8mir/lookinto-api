@@ -1,3 +1,4 @@
+import { WordEntity } from './../entities/word.entity';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
@@ -39,7 +40,7 @@ export class UserWordService {
     });
     return newWords.map(async (word: any) => {
       const result = await this.wordService.findOneById(word.id);
-      console.log('result', result);
+      console.log('result', result.title);
       return result;
     });
   }
