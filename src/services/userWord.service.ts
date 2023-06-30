@@ -41,7 +41,11 @@ export class UserWordService {
     return newWords.map(async (word: any) => {
       const result = await this.wordService.findOneById(word.id);
       console.log('result', result);
-      return result;
+      return {
+        id: result.id,
+        title: result.title,
+        translations: result.translations,
+      };
     });
   }
 
