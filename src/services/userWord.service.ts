@@ -38,25 +38,25 @@ export class UserWordService {
     const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },
     });
-    // const result = newWords.map(async (word: any) => {
-    //   const result = await this.wordService.findOneById(word.id);
-    //   return {
-    //     id: result.id,
-    //     title: result.title,
-    //     translations: result.translations,
-    //   };
-    // });
+    const result = newWords.map(async (word: any) => {
+      const result = await this.wordService.findOneById(word.wordId);
+      return {
+        id: result.id,
+        title: result.title,
+        translations: result.translations,
+      };
+    });
 
-    const result = [];
+    // const result = [];
 
-    for (const word of newWords) {
-      const resultWord = await this.wordService.findOneById(word.wordId);
-      result.push({
-        id: resultWord.id,
-        title: resultWord.title,
-        translations: resultWord.translations,
-      });
-    }
+    // for (const word of newWords) {
+    //   const resultWord = await this.wordService.findOneById(word.wordId);
+    //   result.push({
+    //     id: resultWord.id,
+    //     title: resultWord.title,
+    //     translations: resultWord.translations,
+    //   });
+    // }
     console.log('result', result);
     return result;
   }
