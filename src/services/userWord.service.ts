@@ -38,7 +38,7 @@ export class UserWordService {
     const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },
     });
-    const result = newWords.map(async (word: any) => {
+    const result = await newWords.map(async (word: any) => {
       const result = await this.wordService.findOneById(word.id);
       return {
         id: result.id,
