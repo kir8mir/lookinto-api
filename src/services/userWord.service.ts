@@ -38,16 +38,27 @@ export class UserWordService {
     const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },
     });
-    const result = await newWords.map(async (word: any) => {
-      const result = await this.wordService.findOneById(word.id);
-      return await {
-        id: await result.id,
-        title: await result.title,
-        translations: await result.translations,
-      };
-    });
-    console.dir('result', await result);
-    return await result;
+    // const result = newWords.map(async (word: any) => {
+    //   const result = await this.wordService.findOneById(word.id);
+    //   return {
+    //     id: result.id,
+    //     title: result.title,
+    //     translations: result.translations,
+    //   };
+    // });
+
+    const result = [];
+
+    for (const word of newWords) {
+      const resultWord = await this.wordService.findOneById(word.wordId);
+      result.push({
+        id: resultWord.id,
+        title: resultWord.title,
+        translations: resultWord.translations,
+      });
+    }
+    console.log('result', result);
+    return result;
   }
 
   async getAllFamiliar(id: string) {
