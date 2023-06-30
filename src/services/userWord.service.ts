@@ -46,7 +46,7 @@ export class UserWordService {
         translations: await result.translations,
       };
     });
-    console.log('result', await result);
+    console.dir('result', await result);
     return await result;
   }
 
