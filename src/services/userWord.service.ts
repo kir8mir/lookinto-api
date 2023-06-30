@@ -24,6 +24,18 @@ export class UserWordService {
     return await this.repository.find();
   }
 
+  async getUserWordsByUserId(id: string) {
+    return await this.repository.find({
+      where: { userId: id },
+    });
+  }
+
+  async getAllNew(id: string) {
+    return await this.repository.find({
+      where: { userId: id, status: 'new' },
+    });
+  }
+
   async remove(wordId: number, body: any) {
     const userId = body.userId;
     const word = await this.repository.findOne({

@@ -19,6 +19,14 @@ export class EntryService {
       where: { status: 'ready' },
     });
     const userWord = await this.userWordRepository.find();
+    const updatedUsersArr = [];
+
+    // const updatedUsers = () => {
+    //   const updatedUsers = [];
+    //   for (const user of users) {
+
+    //   }
+    // };
     return [...users, ...userWord];
   }
 }
