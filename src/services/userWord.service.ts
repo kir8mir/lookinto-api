@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserWordEntity } from '../entities/userWord.entity';
+import { WordService } from './word.service';
 
 @Injectable()
 export class UserWordService {
   constructor(
     @InjectRepository(UserWordEntity)
     protected readonly repository: Repository<UserWordEntity>,
+    @Inject(WordService)
+    protected readonly wordService: WordService,
   ) {}
 
   async create(data) {
@@ -31,9 +34,12 @@ export class UserWordService {
   }
 
   async getAllNew(id: string) {
-    return await this.repository.find({
+    const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },
     });
+    return newWords.map(
+      async (word: any) => await this.wordService.findOneById(word.id),
+    );
   }
 
   async getAllFamiliar(id: string) {
