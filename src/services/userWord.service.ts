@@ -37,9 +37,11 @@ export class UserWordService {
     const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },
     });
-    return newWords.map(
-      async (word: any) => await this.wordService.findOneById(word.id),
-    );
+    return newWords.map(async (word: any) => {
+      const result = await this.wordService.findOneById(word.id);
+      console.log('result', result);
+      return result;
+    });
   }
 
   async getAllFamiliar(id: string) {
