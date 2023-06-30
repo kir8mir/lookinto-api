@@ -40,10 +40,10 @@ export class UserWordService {
     });
     const result = await newWords.map(async (word: any) => {
       const result = await this.wordService.findOneById(word.id);
-      return {
-        id: result.id,
-        title: result.title,
-        translations: result.translations,
+      return await {
+        id: await result.id,
+        title: await result.title,
+        translations: await result.translations,
       };
     });
     console.log('result', result);
