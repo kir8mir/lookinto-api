@@ -46,6 +46,7 @@ export class UserWordService {
         translations: result.translations,
       };
     });
+    console.log('result', result);
     return result;
   }
 
