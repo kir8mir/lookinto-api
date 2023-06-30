@@ -33,7 +33,6 @@ export class UserWordService {
     });
   }
 
-
   async getAllNew(id: string) {
     const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },
