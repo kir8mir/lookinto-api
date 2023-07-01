@@ -110,7 +110,7 @@ export class UserWordService {
     const word = await this.repository.findOne({
       where: { userId, wordId },
     });
-    if (word.progressCounter !== 0) {
+    if (word.progressCounter > 0) {
       word.progressCounter -= 1;
     } else {
       switch (word.status) {
@@ -125,6 +125,7 @@ export class UserWordService {
         case 'forgotten':
           word.status = 'known';
           word.progressCounter = 13;
+          break;
       }
     }
     await this.repository.save(word);
@@ -157,6 +158,7 @@ export class UserWordService {
           word.status = 'familiar';
           word.progressCounter = 5;
         }
+        break;
     }
     await this.repository.save(word);
   }
