@@ -54,6 +54,7 @@ export class UserWordService {
   }
 
   async addNewWord(id: string, { origin, transaltion }) {
+    console.log('addNewWord', origin, transaltion);
     const newWord = await this.wordService.create({ title: origin });
     const newTranslation = await this.translationService.create({
       title: transaltion,
