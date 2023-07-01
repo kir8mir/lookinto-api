@@ -59,7 +59,7 @@ export class UserWordService {
             });
             wordForChange.status = status;
           }
-
+          console.log('nwew');
           return 'success';
         };
       case 'familiar':
@@ -70,7 +70,7 @@ export class UserWordService {
             });
             wordForChange.status = status;
           }
-
+          console.log('famil');
           return 'success';
         };
       case 'forgotten':
@@ -81,7 +81,7 @@ export class UserWordService {
             });
             wordForChange.status = status;
           }
-
+          console.log('forgotten');
           return 'success';
         };
     }
