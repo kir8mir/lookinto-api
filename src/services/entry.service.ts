@@ -26,11 +26,33 @@ export class EntryService {
     const users = await this.userRepository.find();
     const actions = [];
     for (const user of users) {
-      const { status } = user;
+      const { status, statusCounter } = user;
       const userWord = await this.userWordService.getOldestSeenWord(
         user.id,
         status,
       );
+
+      if (statusCounter > 0) {
+        user.statusCounter -= 1;
+        if (user.status !== 'new') {
+          user.status = 'new';
+          user.statusCounter = 2;
+        }
+        await this.userRepository.save(user);
+      } else {
+        switch (status) {
+          case 'new':
+            user.status = 'familiar';
+            user.statusCounter = 3;
+            await this.userRepository.save(user);
+            break;
+          case 'familiar':
+            user.status = 'forgotten';
+            user.statusCounter = 5;
+            await this.userRepository.save(user);
+        }
+      }
+
       const word = await this.wordService.findOneById(userWord.wordId);
       const fiveRandomTranslations =
         await this.translationService.getFiveRandomTranslations(word.title);

@@ -72,7 +72,28 @@ export class UserWordService {
     const words = await this.repository.find({
       where: { userId: id },
     });
-    const filteredWords = words.filter((word) => word.status === status);
+    let filteredWords = words.filter((word) => word.status === status);
+    if (!filteredWords.length) {
+      switch (status) {
+        case 'new':
+          filteredWords = words.filter((word) => word.status === 'familiar');
+          if (!filteredWords.length) {
+            filteredWords = words.filter((word) => word.status === 'forgotten');
+          }
+          break;
+        case 'familiar':
+          filteredWords = words.filter((word) => word.status === 'forgotten');
+          if (!filteredWords.length) {
+            filteredWords = words.filter((word) => word.status === 'new');
+          }
+          break;
+        case 'forgotten':
+          filteredWords = words.filter((word) => word.status === 'new');
+          if (!filteredWords.length) {
+            filteredWords = words.filter((word) => word.status === 'familiar');
+          }
+      }
+    }
     filteredWords.sort((a, b) => b.progressCounter - a.progressCounter);
     const oldestWord = filteredWords[0];
     return oldestWord;
