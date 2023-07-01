@@ -56,43 +56,8 @@ export class UserWordService {
       });
       wordForChange.status = status;
       console.log('wordForChange', wordForChange);
-      return wordForChange;
     }
-    // switch (status) {
-    //   case 'new':
-    //     async () => {
-    //       for (const word of words) {
-    //         const wordForChange = await this.repository.findOne({
-    //           where: { userId, wordId: word.id },
-    //         });
-    //         wordForChange.status = status;
-    //       }
-    //       console.log('nwew');
-    //       return 'success';
-    //     };
-    //   case 'familiar':
-    //     async () => {
-    //       for (const word of words) {
-    //         const wordForChange = await this.repository.findOne({
-    //           where: { userId, wordId: word.id },
-    //         });
-    //         wordForChange.status = status;
-    //       }
-    //       console.log('famil');
-    //       return 'success';
-    //     };
-    //   case 'forgotten':
-    //     async () => {
-    //       for (const word of words) {
-    //         const wordForChange = await this.repository.findOne({
-    //           where: { userId, wordId: word.id },
-    //         });
-    //         wordForChange.status = status;
-    //       }
-    //       console.log('forgotten');
-    //       return 'success';
-    //     };
-    // }
+    return 'success';
   }
 
   async getAllFamiliar(id: string) {
