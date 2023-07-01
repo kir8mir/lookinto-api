@@ -27,6 +27,23 @@ export class UserWordService {
     return await this.repository.find();
   }
 
+  async changeWordStatusImmediately(body: any) {
+    const { userId, status, words } = body;
+
+    for (const word of words) {
+      const wordForChange = await this.repository.findOne({
+        where: { userId, wordId: word.id },
+      });
+      wordForChange.status = status;
+      switch (status) {
+        case 'familiar':
+          wordForChange.statusCounter = 5;
+      }
+      await this.repository.save(wordForChange);
+    }
+    return 'success';
+  }
+
   async getUserWordsByUserId(id: string) {
     return await this.repository.find({
       where: { userId: id },
@@ -47,31 +64,14 @@ export class UserWordService {
     return result;
   }
 
-  async changeWordStatusImmediately(body: any) {
-    const { userId, status, words } = body;
-
-    for (const word of words) {
-      const wordForChange = await this.repository.findOne({
-        where: { userId, wordId: word.id },
-      });
-      wordForChange.status = status;
-      switch (status) {
-        case 'familiar':
-          wordForChange.statusCounter = 5;
-      }
-      await this.repository.save(wordForChange);
-    }
-    return 'success';
-  }
-
   async getAllFamiliar(id: string) {
-    const newWords = await this.repository.find({
+    const familiarWords = await this.repository.find({
       where: { userId: id, status: 'familiar' },
     });
 
     const result = [];
 
-    for (const word of newWords) {
+    for (const word of familiarWords) {
       const resultWord = await this.wordService.findOneById(word.wordId);
       result.push(resultWord);
     }
@@ -79,13 +79,13 @@ export class UserWordService {
   }
 
   async getAllForgotten(id: string) {
-    const newWords = await this.repository.find({
+    const forgottenWords = await this.repository.find({
       where: { userId: id, status: 'forgotten' },
     });
 
     const result = [];
 
-    for (const word of newWords) {
+    for (const word of forgottenWords) {
       const resultWord = await this.wordService.findOneById(word.wordId);
       result.push(resultWord);
     }
