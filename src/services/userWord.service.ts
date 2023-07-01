@@ -49,14 +49,17 @@ export class UserWordService {
 
   async changeWordStatusImmediately(body: any) {
     const { userId, status, words } = body;
-    console.log('body', body);
+
     for (const word of words) {
       const wordForChange = await this.repository.findOne({
         where: { userId, wordId: word.id },
       });
       wordForChange.status = status;
+      switch (status) {
+        case 'familiar':
+          wordForChange.statusCounter = 5;
+      }
       await this.repository.save(wordForChange);
-      console.log('wordForChange', wordForChange);
     }
     return 'success';
   }
