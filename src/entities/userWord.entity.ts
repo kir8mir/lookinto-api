@@ -23,5 +23,5 @@ export class UserWordEntity extends BaseEntity {
   status: string;
 
   @Column()
-  statusCounter: number;
+  progressCounter: number;
 }

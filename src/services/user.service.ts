@@ -16,8 +16,8 @@ export class UserService {
     model.id = data.id;
     model.password = data.password;
     model.email = data.email;
-    model.status = 'ready';
-    model.statusCounter = 4;
+    model.status = 'new';
+    model.statusCounter = 2;
     model.messageTimeCounter = data.messageTimeCounter;
     model.doNotDisturb = null;
     model.billStatus = 'free';

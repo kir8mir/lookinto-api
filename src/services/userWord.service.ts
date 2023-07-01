@@ -22,7 +22,7 @@ export class UserWordService {
     model.wordId = data.wordId;
     model.userId = data.userId;
     model.status = 'new';
-    model.statusCounter = 1;
+    model.progressCounter = 3;
     return await model.save();
   }
 
@@ -39,8 +39,12 @@ export class UserWordService {
       });
       wordForChange.status = status;
       switch (status) {
+        case 'new':
+          wordForChange.progressCounter = 3;
         case 'familiar':
-          wordForChange.statusCounter = 5;
+          wordForChange.progressCounter = 5;
+        case 'forgotten':
+          wordForChange.progressCounter = 8;
       }
       await this.repository.save(wordForChange);
     }
@@ -54,7 +58,6 @@ export class UserWordService {
   }
 
   async addNewWord(id: string, { origin, translation }) {
-    console.log('addNewWord', origin, translation);
     const newWord = await this.wordService.create({ title: origin });
     const newTranslation = await this.translationService.create({
       title: translation,
