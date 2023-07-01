@@ -52,20 +52,38 @@ export class UserWordService {
 
     switch (status) {
       case 'new':
-        return await this.repository.update(
-          { userId, wordId: In(words) },
-          { status },
-        );
+        async () => {
+          for (const word of words) {
+            const wordForChange = await this.repository.findOne({
+              where: { userId, wordId: word.id },
+            });
+            wordForChange.status = status;
+          }
+
+          return 'success';
+        };
       case 'familiar':
-        return await this.repository.update(
-          { userId, wordId: In(words) },
-          { status },
-        );
+        async () => {
+          for (const word of words) {
+            const wordForChange = await this.repository.findOne({
+              where: { userId, wordId: word.id },
+            });
+            wordForChange.status = status;
+          }
+
+          return 'success';
+        };
       case 'forgotten':
-        return await this.repository.update(
-          { userId, wordId: In(words) },
-          { status },
-        );
+        async () => {
+          for (const word of words) {
+            const wordForChange = await this.repository.findOne({
+              where: { userId, wordId: word.id },
+            });
+            wordForChange.status = status;
+          }
+
+          return 'success';
+        };
     }
   }
 
