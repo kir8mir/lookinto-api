@@ -57,7 +57,7 @@ export class EntryService {
       const fiveRandomTranslations =
         await this.translationService.getFiveRandomTranslations(word.title);
 
-      actions.push({ word, fiveRandomTranslations });
+      actions.push({ word, fiveRandomTranslations, userId: user.id });
     }
 
     return actions;
