@@ -105,7 +105,8 @@ export class UserWordService {
     });
   }
 
-  async rightAnswer(userId: string, wordId: number) {
+  async rightAnswer(userId: string, body: any) {
+    const { wordId } = body;
     const word = await this.repository.findOne({
       where: { userId, wordId },
     });
