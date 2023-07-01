@@ -71,6 +71,8 @@ export class UserWordService {
             wordForChange.status = status;
           }
 
+          console.log('body', body);
+
           return 'success';
         };
       case 'forgotten':
