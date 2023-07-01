@@ -32,6 +32,7 @@ export class EntryService {
         status,
       );
 
+
       if (statusCounter > 0) {
         user.statusCounter -= 1;
         if (user.status !== 'new') {
