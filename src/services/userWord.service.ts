@@ -127,6 +127,7 @@ export class UserWordService {
           word.progressCounter = 13;
       }
     }
+    await this.repository.save(word);
   }
 
   async wrongAnswer(userId: string, body: any) {
@@ -157,6 +158,7 @@ export class UserWordService {
           word.progressCounter = 5;
         }
     }
+    await this.repository.save(word);
   }
 
   async getAllNew(id: string) {
