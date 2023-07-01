@@ -50,41 +50,47 @@ export class UserWordService {
   async changeWordStatusImmediately(body: any) {
     const { userId, status, words } = body;
     console.log('body', body);
-    switch (status) {
-      case 'new':
-        async () => {
-          for (const word of words) {
-            const wordForChange = await this.repository.findOne({
-              where: { userId, wordId: word.id },
-            });
-            wordForChange.status = status;
-          }
-          console.log('nwew');
-          return 'success';
-        };
-      case 'familiar':
-        async () => {
-          for (const word of words) {
-            const wordForChange = await this.repository.findOne({
-              where: { userId, wordId: word.id },
-            });
-            wordForChange.status = status;
-          }
-          console.log('famil');
-          return 'success';
-        };
-      case 'forgotten':
-        async () => {
-          for (const word of words) {
-            const wordForChange = await this.repository.findOne({
-              where: { userId, wordId: word.id },
-            });
-            wordForChange.status = status;
-          }
-          console.log('forgotten');
-          return 'success';
-        };
+    for (const word of words) {
+      const wordForChange = await this.repository.findOne({
+        where: { userId, wordId: word.id },
+      });
+      wordForChange.status = status;
     }
+    // switch (status) {
+    //   case 'new':
+    //     async () => {
+    //       for (const word of words) {
+    //         const wordForChange = await this.repository.findOne({
+    //           where: { userId, wordId: word.id },
+    //         });
+    //         wordForChange.status = status;
+    //       }
+    //       console.log('nwew');
+    //       return 'success';
+    //     };
+    //   case 'familiar':
+    //     async () => {
+    //       for (const word of words) {
+    //         const wordForChange = await this.repository.findOne({
+    //           where: { userId, wordId: word.id },
+    //         });
+    //         wordForChange.status = status;
+    //       }
+    //       console.log('famil');
+    //       return 'success';
+    //     };
+    //   case 'forgotten':
+    //     async () => {
+    //       for (const word of words) {
+    //         const wordForChange = await this.repository.findOne({
+    //           where: { userId, wordId: word.id },
+    //         });
+    //         wordForChange.status = status;
+    //       }
+    //       console.log('forgotten');
+    //       return 'success';
+    //     };
+    // }
   }
 
   async getAllFamiliar(id: string) {
