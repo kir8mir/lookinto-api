@@ -15,6 +15,11 @@ export class UserWordController {
     return this.userWordService.changeWordStatusImmediately(body);
   }
 
+  @Post('/new/:id')
+  async addNewWord(@Body() body: any, @Param('id') id: string) {
+    return this.userWordService.addNewWord(id, body);
+  }
+
   @Get('')
   async getAll() {
     return this.userWordService.getAll();

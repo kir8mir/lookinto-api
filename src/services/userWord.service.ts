@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { UserWordEntity } from '../entities/userWord.entity';
 import { WordService } from './word.service';
+import { TranslationService } from './translation.service';
 
 @Injectable()
 export class UserWordService {
@@ -12,6 +13,8 @@ export class UserWordService {
     protected readonly repository: Repository<UserWordEntity>,
     @Inject(WordService)
     protected readonly wordService: WordService,
+    @Inject(TranslationService)
+    protected readonly translationService: TranslationService,
   ) {}
 
   async create(data) {
@@ -19,7 +22,7 @@ export class UserWordService {
     model.wordId = data.wordId;
     model.userId = data.userId;
     model.status = 'new';
-    model.statusCounter = 4;
+    model.statusCounter = 1;
     return await model.save();
   }
 
@@ -48,6 +51,17 @@ export class UserWordService {
     return await this.repository.find({
       where: { userId: id },
     });
+  }
+
+  async addNewWord(id: string, { origin, transaltion }) {
+    const newWord = await this.wordService.create({ title: origin });
+    const newTranslation = await this.translationService.create({
+      title: transaltion,
+      word: newWord.id,
+    });
+
+    const userWord = await this.create({ wordId: newWord.id, userId: id });
+    return { newWord, newTranslation, userWord };
   }
 
   async getAllNew(id: string) {
