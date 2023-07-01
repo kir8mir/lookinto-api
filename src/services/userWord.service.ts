@@ -1,8 +1,7 @@
-import { WordEntity } from './../entities/word.entity';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { UserWordEntity } from '../entities/userWord.entity';
 import { WordService } from './word.service';
 
@@ -46,6 +45,28 @@ export class UserWordService {
       result.push(resultWord);
     }
     return result;
+  }
+
+  async changeWordStatusImmediately(body: any) {
+    const { userId, status, words } = body;
+
+    switch (status) {
+      case 'new':
+        return await this.repository.update(
+          { userId, wordId: In(words) },
+          { status },
+        );
+      case 'familiar':
+        return await this.repository.update(
+          { userId, wordId: In(words) },
+          { status },
+        );
+      case 'forgotten':
+        return await this.repository.update(
+          { userId, wordId: In(words) },
+          { status },
+        );
+    }
   }
 
   async getAllFamiliar(id: string) {

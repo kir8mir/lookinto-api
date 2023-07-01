@@ -6,8 +6,13 @@ export class UserWordController {
   constructor(protected userWordService: UserWordService) {}
 
   @Post()
-  async addWordToNext(@Body() body: any) {
+  async create(@Body() body: any) {
     return this.userWordService.create(body);
+  }
+
+  @Post('/change/status')
+  async changeStatusImmediately(@Body() body: any) {
+    return this.userWordService.changeWordStatusImmediately(body);
   }
 
   @Get('')
