@@ -55,6 +55,7 @@ export class UserWordService {
         where: { userId, wordId: word.id },
       });
       wordForChange.status = status;
+      await this.repository.save(wordForChange);
       console.log('wordForChange', wordForChange);
     }
     return 'success';
