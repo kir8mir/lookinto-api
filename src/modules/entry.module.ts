@@ -7,6 +7,7 @@ import { UserEntity } from '../entities/user.entity';
 import { UserWordEntity } from '../entities/userWord.entity';
 import { TranslationModule } from './translation.module';
 import { WordModule } from './word.module';
+import { UserWordModule } from './userWord.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { WordModule } from './word.module';
     TypeOrmModule.forFeature([UserWordEntity]),
     TranslationModule,
     WordModule,
+    UserWordModule,
   ],
   controllers: [EntryController],
   providers: [EntryService],
