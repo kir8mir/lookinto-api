@@ -94,7 +94,7 @@ export class UserWordService {
           }
       }
     }
-    filteredWords.sort((a, b) => b.progressCounter - a.progressCounter);
+    filteredWords.sort((a, b) => a.progressCounter - b.progressCounter);
     const oldestWord = filteredWords[0];
     return oldestWord;
   }
