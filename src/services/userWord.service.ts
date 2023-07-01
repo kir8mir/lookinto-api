@@ -53,11 +53,11 @@ export class UserWordService {
     });
   }
 
-  async addNewWord(id: string, { origin, transaltion }) {
-    console.log('addNewWord', origin, transaltion);
+  async addNewWord(id: string, { origin, translation }) {
+    console.log('addNewWord', origin, translation);
     const newWord = await this.wordService.create({ title: origin });
     const newTranslation = await this.translationService.create({
-      title: transaltion,
+      title: translation,
       word: newWord.id,
     });
 
