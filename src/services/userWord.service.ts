@@ -49,7 +49,7 @@ export class UserWordService {
 
   async changeWordStatusImmediately(body: any) {
     const { userId, status, words } = body;
-
+    console.log('body', body);
     switch (status) {
       case 'new':
         async () => {
@@ -70,8 +70,6 @@ export class UserWordService {
             });
             wordForChange.status = status;
           }
-
-          console.log('body', body);
 
           return 'success';
         };
