@@ -65,16 +65,33 @@ export class UserWordService {
   }
 
   async getAllFamiliar(id: string) {
-    return await this.repository.find({
+    const newWords = await this.repository.find({
       where: { userId: id, status: 'familiar' },
     });
+
+    const result = [];
+
+    for (const word of newWords) {
+      const resultWord = await this.wordService.findOneById(word.wordId);
+      result.push(resultWord);
+    }
+    return result;
   }
 
   async getAllForgotten(id: string) {
-    return await this.repository.find({
+    const newWords = await this.repository.find({
       where: { userId: id, status: 'forgotten' },
     });
+
+    const result = [];
+
+    for (const word of newWords) {
+      const resultWord = await this.wordService.findOneById(word.wordId);
+      result.push(resultWord);
+    }
+    return result;
   }
+
   async remove(wordId: number, body: any) {
     const userId = body.userId;
     const word = await this.repository.findOne({
