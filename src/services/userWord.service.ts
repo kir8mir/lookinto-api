@@ -105,6 +105,58 @@ export class UserWordService {
     });
   }
 
+  async rightAnswer(userId: string, wordId: number) {
+    const word = await this.repository.findOne({
+      where: { userId, wordId },
+    });
+    if (word.progressCounter !== 0) {
+      word.progressCounter -= 1;
+    } else {
+      switch (word.status) {
+        case 'new':
+          word.status = 'familiar';
+          word.progressCounter = 5;
+          break;
+        case 'familiar':
+          word.status = 'forgotten';
+          word.progressCounter = 8;
+          break;
+        case 'forgotten':
+          word.status = 'known';
+          word.progressCounter = 13;
+      }
+    }
+  }
+
+  async wrongAnswer(userId: string, wordId: number) {
+    const word = await this.repository.findOne({
+      where: { userId, wordId },
+    });
+
+    switch (word.status) {
+      case 'new':
+        if (word.progressCounter < 3) {
+          word.progressCounter += 1;
+        }
+        break;
+      case 'familiar':
+        if (word.progressCounter < 5) {
+          word.progressCounter += 1;
+        } else {
+          word.status = 'new';
+          word.progressCounter = 3;
+        }
+        break;
+      case 'forgotten':
+        if (word.progressCounter < 8) {
+          word.progressCounter += 1;
+        } else {
+          word.status = 'familiar';
+          word.progressCounter = 5;
+        }
+    }
+  }
+
   async getAllNew(id: string) {
     const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },

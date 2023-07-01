@@ -20,6 +20,16 @@ export class UserWordController {
     return this.userWordService.addNewWord(id, body);
   }
 
+  @Post('/right/:id')
+  async setRight(@Body() body: any, @Param('id') id: string) {
+    return this.userWordService.rightAnswer(id, body);
+  }
+
+  @Post('/wrong/:id')
+  async setWrong(@Body() body: any, @Param('id') id: string) {
+    return this.userWordService.wrongAnswer(id, body);
+  }
+
   @Get('')
   async getAll() {
     return this.userWordService.getAll();
