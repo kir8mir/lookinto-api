@@ -54,6 +54,7 @@ export class UserWordService {
       const wordForChange = await this.repository.findOne({
         where: { userId, wordId: word.id },
       });
+      wordForChange.status = status;
       console.log('wordForChange', wordForChange);
       return wordForChange;
     }
