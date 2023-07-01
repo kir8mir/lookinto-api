@@ -68,6 +68,22 @@ export class UserWordService {
     return { newWord, newTranslation, userWord };
   }
 
+  async getOldestSeenWord(id: string, status: string) {
+    const words = await this.repository.find({
+      where: { userId: id },
+    });
+    const filteredWords = words.filter((word) => word.status === status);
+    filteredWords.sort((a, b) => b.progressCounter - a.progressCounter);
+    const oldestWord = filteredWords[0];
+    return oldestWord;
+  }
+
+  async getById(id: string) {
+    return await this.repository.findOne({
+      where: { id: +id },
+    });
+  }
+
   async getAllNew(id: string) {
     const newWords = await this.repository.find({
       where: { userId: id, status: 'new' },

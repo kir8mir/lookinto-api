@@ -26,6 +26,22 @@ export class TranslationService {
     return await this.repository.find({ where: { word: { id: wordId } } });
   }
 
+  async getFiveRandomTranslations(title: string) {
+    const translations = await this.getAll();
+    const withoutCurrent = translations.filter(
+      (translation) => translation.title !== title,
+    );
+    const randomTranslations = [];
+    while (randomTranslations.length < 5) {
+      const randomIndex = Math.floor(Math.random() * withoutCurrent.length);
+      const randomTranslation = withoutCurrent[randomIndex];
+      if (!randomTranslations.includes(randomTranslation)) {
+        randomTranslations.push(randomTranslation);
+      }
+    }
+    return randomTranslations;
+  }
+
   async getAll() {
     return await this.repository.find();
   }
