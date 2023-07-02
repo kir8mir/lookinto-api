@@ -41,10 +41,13 @@ export class UserWordService {
       switch (status) {
         case 'new':
           wordForChange.progressCounter = 3;
+          break;
         case 'familiar':
           wordForChange.progressCounter = 5;
+          break;
         case 'forgotten':
           wordForChange.progressCounter = 8;
+          break;
       }
       await this.repository.save(wordForChange);
     }
